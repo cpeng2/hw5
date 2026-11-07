@@ -273,8 +273,8 @@ def main():
             display_results(rank_by_sales(games, year))
         elif choice == "5":
             show_genres(games)
-        elif choice == "6":
-            print("Goodbye!")
+        elif choice.lower() in ("6", "q", "quit"):
+            print("Go play in traffic!")
             break
         else:
             print("Invalid choice, try again.")
