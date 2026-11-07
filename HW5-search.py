@@ -206,6 +206,17 @@ def binary_search_title(data, prefix):
     #   - prefix comes BEFORE the middle title -> search the lower half
     #   - otherwise -> search the upper half
     # If low passes high, nothing matched.
+    low = 0
+    high = len(data) - 1
+    while low <= high:
+        mid = (low + high) // 2
+        current = data[mid][TITLE]
+        if current.lower().startswith(prefix.lower()):
+            return mid
+        elif prefix.lower() < current.lower():
+            high = mid - 1
+        else:
+            low = mid + 1  
     return -1
 
 
