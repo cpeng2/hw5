@@ -185,7 +185,11 @@ def linear_search_console_year(data, console, year):
     - Return an empty list if nothing matches.
     """
     # TODO: loop over every row, collect the ones that match, return them.
-    return []
+    matches = []
+    for game in data:
+        if game[YEAR] == year and game[CONSOLE].lower() == console.lower():
+            matches.append(game)
+    return matches
 
 
 def binary_search_title(data, prefix):
