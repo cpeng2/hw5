@@ -1,0 +1,3 @@
+1. The names for everything were given, I didn't change anything and followed the naming conventions from the previous code.
+2. This assignment felt a little boring, to be honest. The contributions that we had to make were basically the same as code we practiced in class. I think it would have been more fun for me if we had more to do - e.g. write all the searches.
+3. I spent more time reading the assignment and code that was given + making sure I did the git part correctly, than writing code.

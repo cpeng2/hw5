@@ -184,8 +184,11 @@ def linear_search_console_year(data, console, year):
     - Return the original rows (keep their original capitalization).
     - Return an empty list if nothing matches.
     """
-    # TODO: loop over every row, collect the ones that match, return them.
-    return []
+    matches = []
+    for game in data:
+        if game[CONSOLE].lower() == console.lower() and game[YEAR] == year:
+            matches.append(game)
+    return matches
 
 
 def binary_search_title(data, prefix):
@@ -197,11 +200,22 @@ def binary_search_title(data, prefix):
     - If the middle title does not start with prefix, decide which half
       to keep by comparing prefix to the middle title.
     """
-    # TODO: set low and high, then repeat: look at the middle row.
-    #   - title starts with prefix -> return mid
-    #   - prefix comes BEFORE the middle title -> search the lower half
-    #   - otherwise -> search the upper half
-    # If low passes high, nothing matched.
+    low = 0
+    high = len(data)
+
+    while low <= high:
+        mid = (low + high)//2
+        guess = data[mid][TITLE].lower()
+
+        if guess.startswith(prefix.lower()):
+            return mid
+
+        elif guess < prefix.lower():
+            low = mid + 1
+
+        else:
+            high = mid - 1
+
     return -1
 
 
@@ -214,10 +228,12 @@ def search_by_title(data, prefix):
     Return the matches in file order (backward matches, the seed row, then
     forward matches). Return [] if binary search finds nothing.
     """
-    # TODO: 1) seed_index = binary_search_title(data, prefix)
-    #       2) if it is -1, return []
-    #       3) call look_forward_backward twice (-1 and 1)
-    #       4) combine: backward matches + [data[seed_index]] + forward matches
+    seed_index = binary_search_title(data, prefix)
+
+    if seed_index > -1:
+        forward = look_forward_backward(data, seed_index, prefix, 1)
+        backward = look_forward_backward(data, seed_index, prefix, -1)
+        return backward + [data[seed_index]] + forward
     return []
 
 
