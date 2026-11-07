@@ -1,0 +1,21 @@
+1. Functions
+
+linear_search_console_year
+  Parameters: data (list of lists, where each row of the imported csv is one of the nested list items), console (index 6 of each nested list, string), year (index 8 of each nested list item, integer)
+  Returns: matches (list, either empty or containing at least one list item representing a csv row)
+
+binary_search_title
+  Parameters: data (see above), prefix (whatever string you entered as an input)
+  Returns: index number of the first nested list item the binary search process finds where the title (index 0 of the nested list item) starts with whatever you input, else -1
+
+search_by_title
+  Parameters: data, prefix (see above)
+  Returns: a list, either empty or containing at least one list item representing a csv row where the title starts with whatever you input
+
+2. Challenges / enjoyed
+
+Challenges: understanding the instructions, was, as ever, difficult for me. I also had alot of difficulty figuring out binary search because my notes from class were not good. Mixed up directions in forwards and backwards multiple times. Am also displeased that older games were not included in the dataset. Tl;dr- I am old and have difficulty with directions.
+
+Enjoyed: little changes to provided code for quit/goodbye message.
+
+3. Time spent: best guess is ~2 hours, with a couple hours of sidequests between each 15-20 minutes of relevant work.
