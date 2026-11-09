@@ -1,0 +1,23 @@
+HW5 Reflection - Yunzhen Yang
+
+1. Functions I wrote
+
+linear_search_console_year(data, console, year)
+- Inputs: data (list of game rows), console (string), year (int)
+- Returns: a list of all games whose console (case-insensitive) and year both match, or an empty list if none match.
+
+binary_search_title(data, prefix)
+- Inputs: data (list of game rows, sorted by title), prefix (string)
+- Returns: the index of any game whose title starts with prefix(case-insensitive), or -1 if no title matches.
+ 
+search_by_title(data, prefix)
+- Inputs: data (list of game rows), prefix (string)
+- Returns: a list of all games whose title starts with prefix, in file order, or an empty list if none match.
+ 
+2. Challenges
+
+For the binary search part, I got to be very careful with the index of the items, it's very easy to miss if making any mistake on the indexes.
+
+3. Time spent
+
+About 1 hour.

@@ -1,5 +1,5 @@
 """
-HW6 Starter: Linear and Binary Search on video game data.
+HW5 Starter: Linear and Binary Search on video game data.
 
 Purpose: let the user explore a CSV of video games by
   1. console + release year      (LINEAR search)   <- you write this
@@ -185,7 +185,11 @@ def linear_search_console_year(data, console, year):
     - Return an empty list if nothing matches.
     """
     # TODO: loop over every row, collect the ones that match, return them.
-    return []
+    matches = []
+    for game in data:
+        if game[CONSOLE].lower() == console.lower() and game[YEAR] == year:
+            matches.append(game)
+    return matches
 
 
 def binary_search_title(data, prefix):
@@ -202,6 +206,17 @@ def binary_search_title(data, prefix):
     #   - prefix comes BEFORE the middle title -> search the lower half
     #   - otherwise -> search the upper half
     # If low passes high, nothing matched.
+    low = 0
+    high = len(data) - 1
+    while low <= high:
+        mid = (low + high) // 2
+        title = data[mid][TITLE].lower()
+        if title.startswith(prefix.lower()):
+            return mid
+        elif prefix.lower() < title:
+            high = mid - 1
+        else:
+            low = mid + 1
     return -1
 
 
@@ -218,7 +233,12 @@ def search_by_title(data, prefix):
     #       2) if it is -1, return []
     #       3) call look_forward_backward twice (-1 and 1)
     #       4) combine: backward matches + [data[seed_index]] + forward matches
-    return []
+    seed_index = binary_search_title(data, prefix)
+    if seed_index == -1:
+        return []
+    backward_matches = look_forward_backward(data, seed_index, prefix, -1)
+    forward_matches = look_forward_backward(data, seed_index, prefix, 1)
+    return backward_matches + [data[seed_index]] + forward_matches
 
 
 
