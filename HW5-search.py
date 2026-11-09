@@ -184,8 +184,13 @@ def linear_search_console_year(data, console, year):
     - Return the original rows (keep their original capitalization).
     - Return an empty list if nothing matches.
     """
-    # TODO: loop over every row, collect the ones that match, return them.
-    return []
+    matches = []
+    lowercase_console = console.lower()
+
+    for game in data:
+        if game[CONSOLE].lower() == lowercase_console and game[YEAR] == year:
+            matches.append(game)
+    return matches
 
 
 def binary_search_title(data, prefix):
@@ -197,11 +202,21 @@ def binary_search_title(data, prefix):
     - If the middle title does not start with prefix, decide which half
       to keep by comparing prefix to the middle title.
     """
-    # TODO: set low and high, then repeat: look at the middle row.
-    #   - title starts with prefix -> return mid
-    #   - prefix comes BEFORE the middle title -> search the lower half
-    #   - otherwise -> search the upper half
-    # If low passes high, nothing matched.
+    low = 0
+    high = len(data) - 1
+    lowercase_prefix = prefix.lower()
+
+    while low <= high:
+        middle = (low + high) // 2
+        middle_title = data[middle][TITLE].lower()
+    
+        if middle_title.startswith(lowercase_prefix):
+            return middle
+        elif lowercase_prefix < middle_title:
+            high = middle - 1
+        else:
+            low = middle + 1
+
     return -1
 
 
@@ -214,12 +229,15 @@ def search_by_title(data, prefix):
     Return the matches in file order (backward matches, the seed row, then
     forward matches). Return [] if binary search finds nothing.
     """
-    # TODO: 1) seed_index = binary_search_title(data, prefix)
-    #       2) if it is -1, return []
-    #       3) call look_forward_backward twice (-1 and 1)
-    #       4) combine: backward matches + [data[seed_index]] + forward matches
-    return []
+    start_index = binary_search_title(data, prefix)
 
+    if start_index == -1:
+        return []
+    else:
+        starting_match = [data[start_index]]
+        forward_matches = look_forward_backward(data, start_index, prefix, 1)
+        backward_matches = look_forward_backward(data, start_index, prefix, -1)
+        return backward_matches + starting_match + forward_matches
 
 
 # ---------------------------------------------------------------------------

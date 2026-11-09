@@ -1,0 +1,17 @@
+1. For each of the three functions:
+
+linear_search_console_year(data, console, year)
+- Input: data (list of lists), console (string), year (int)
+- Returns: If there are matches, a list of every game whose console and year both match. If no matches, an empty list.
+
+binary_search_title(data, prefix)
+- Input: data (list of lists), prefix (string)
+- Returns: If there is a match, the index (int) of a singular game whose title starts with the given prefix. If no match, -1 (int).
+
+search_by_title(data, prefix)
+- Input: data (list of lists), prefix (string)
+- Returns: If there are matches, a list of every game whose title starts with the given prefix. If no matches, an empty list.
+
+2. I enjoyed how this homework directly called back to our lecture on binary search and all I had to do is plug in the same exact setup we did for binary search if you're not using bisect.bisect_left(). Putting it into practice made binary search make a lot more sense to me.
+
+3. I spent around 2 hours on this assignment. I didn't need to write much code and for the binary search function, we were already given the setup for it in the previous lecture. 
