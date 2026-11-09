@@ -178,48 +178,37 @@ def show_genres(data):
 # ---------------------------------------------------------------------------
 
 def linear_search_console_year(data, console, year):
-    """Return a list of ALL rows whose console and year both match.
-
-    - Compare console in lowercase so the search is case-insensitive.
-    - Return the original rows (keep their original capitalization).
-    - Return an empty list if nothing matches.
-    """
-    # TODO: loop over every row, collect the ones that match, return them.
-    return []
+    matches = []
+    for game in data:
+        if game[CONSOLE].lower() == console.lower() and game[YEAR] == year:
+            matches.append(game)
+    return matches
 
 
 def binary_search_title(data, prefix):
-    """Return the index of ANY row whose title starts with prefix, or -1.
 
-    data is sorted by title, so use binary search (do NOT loop over everything).
-    - Compare in lowercase.
-    - Use .startswith(prefix) to test for a match (not ==).
-    - If the middle title does not start with prefix, decide which half
-      to keep by comparing prefix to the middle title.
-    """
-    # TODO: set low and high, then repeat: look at the middle row.
-    #   - title starts with prefix -> return mid
-    #   - prefix comes BEFORE the middle title -> search the lower half
-    #   - otherwise -> search the upper half
-    # If low passes high, nothing matched.
+    prefix = prefix.lower()
+    low = 0
+    high = len(data) - 1
+    while low <= high:
+        mid = (low + high) // 2
+        title = data[mid][TITLE].lower()
+        if title.startswith(prefix):
+            return mid
+        elif prefix < title:
+            high = mid - 1
+        else:
+            low = mid + 1
     return -1
 
 
 def search_by_title(data, prefix):
-    """Return ALL rows whose title starts with prefix.
-
-    Binary search only gives you ONE match. Games with the same title (or the
-    same start, like 'LEGO') sit next to each other, so use the match as a
-    starting point and call look_forward_backward in both directions.
-    Return the matches in file order (backward matches, the seed row, then
-    forward matches). Return [] if binary search finds nothing.
-    """
-    # TODO: 1) seed_index = binary_search_title(data, prefix)
-    #       2) if it is -1, return []
-    #       3) call look_forward_backward twice (-1 and 1)
-    #       4) combine: backward matches + [data[seed_index]] + forward matches
-    return []
-
+    seed_index = binary_search_title(data, prefix)
+    if seed_index == -1:
+        return []
+    backward = look_forward_backward(data, seed_index, prefix, -1)
+    forward = look_forward_backward(data, seed_index, prefix, 1)
+    return backward + [data[seed_index]] + forward
 
 
 # ---------------------------------------------------------------------------
